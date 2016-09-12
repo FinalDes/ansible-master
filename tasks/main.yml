@@ -1,0 +1,12 @@
+---
+# tasks file for ansibleMaster
+- name: add repository
+  apt_repository: repo='{{item}}' update_cache=yes
+  with_items:
+    - ppa:ansible/ansible
+    - ppa:git-core/ppa
+- name: install tools
+  apt: name={{item}} state=latest
+  with_items:
+    - ansible
+    - git
