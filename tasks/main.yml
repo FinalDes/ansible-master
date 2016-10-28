@@ -5,8 +5,11 @@
   with_items:
     - ppa:ansible/ansible
     - ppa:git-core/ppa
+    - ppa:jonathonf/vim
+  when: ansible_distribution == 'Ubuntu'
 - name: install tools
   apt: name={{item}} state=latest
   with_items:
     - ansible
     - git
+    - vim
