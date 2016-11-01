@@ -2,7 +2,9 @@
 # tasks file for ansibleMaster
 - name: add repository
   become: yes
-  apt_repository: repo='{{item}}' update_cache=yes
+  apt_repository:
+    repo: '{{item}}' 
+    update_cache: yes
   with_items:
     - ppa:ansible/ansible
     - ppa:git-core/ppa
