@@ -1,6 +1,7 @@
 ---
 # tasks file for ansibleMaster
 - name: add repository
+  become: yes
   apt_repository: repo='{{item}}' update_cache=yes
   with_items:
     - ppa:ansible/ansible
@@ -8,9 +9,27 @@
     - ppa:jonathonf/vim
   when: ansible_distribution == 'Ubuntu'
 - name: install tools
+  become: yes
   apt: name={{item}} state=latest
   with_items:
     - ansible
     - git
     - vim
     - tmux
+    - zsh
+- name: install oh-my-zsh
+  git:
+    repo: git://github.com/robbyrussell/oh-my-zsh.git
+    dest: ~/.oh-my-zsh
+- name: Set zsh as default shell
+  user: name=ansible shell=/usr/bin/zsh
+  become: yes
+- name: copy zsh config
+  copy:
+    src: config/.zshrc
+    dest: ~/.zshrc
+- name: shell to zsh
+  become: yes
+  user:
+    name: "{{ansible_user_id}}"
+    shell: /bin/zsh
