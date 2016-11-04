@@ -3,7 +3,7 @@
 - name: add repository
   become: yes
   apt_repository:
-    repo: '{{item}}' 
+    repo: '{{item}}'
     update_cache: yes
   with_items:
     - ppa:ansible/ansible
@@ -19,6 +19,8 @@
     - vim
     - tmux
     - zsh
+- name: install pywinrm
+  pip: name=pywinrm
 - name: install oh-my-zsh
   git:
     repo: git://github.com/robbyrussell/oh-my-zsh.git
