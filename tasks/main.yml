@@ -19,7 +19,11 @@
     - vim
     - tmux
     - zsh
+- name: install pip
+  become: yes
+  easy_install: name=pip state=latest
 - name: install pywinrm
+  become: yes
   pip: name=pywinrm
 - name: install oh-my-zsh
   git:
