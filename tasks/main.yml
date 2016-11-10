@@ -4,10 +4,8 @@
   apt_repository:
     repo: ppa:ansible/ansible
     update_cache: yes
-  with_items:
   when: ansible_distribution == 'Ubuntu'
 - name: install tools
-  become: yes
   apt:
     name: ansible
     state: latest
@@ -16,6 +14,5 @@
     name: pip
     state: latest
 - name: install pywinrm
-  become: yes
   pip:
     name: pywinrm
